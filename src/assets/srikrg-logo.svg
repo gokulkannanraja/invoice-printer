@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SriKRG navy minimal clock logo -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="64" viewBox="0 0 320 128" role="img" aria-label="SriKRG logo">
+  <defs />
+
+  <!-- minimal navy clock -->
+  <g transform="translate(16,16)">
+  <!-- increase radius for more inner padding -->
+  <circle cx="48" cy="48" r="60" fill="#008fcf" stroke="#008fcf" stroke-width="2" />
+
+  <!-- hour ticks removed as requested -->
+
+  <!-- clock hands set to 8:00 (hour hand pointing to 8, minute hand to 12) -->
+  <!-- minute hand (12) -->
+  <!-- minute hand: shortened and thinner -->
+  <line x1="48" y1="48" x2="48" y2="30" stroke="#e6f7ff" stroke-width="2" stroke-linecap="round" />
+  <!-- hour hand (8) - calculated endpoint approx (31,58) -->
+  <!-- hour hand: shortened and thinner -->
+  <line x1="48" y1="48" x2="38" y2="54" stroke="#e6f7ff" stroke-width="2" stroke-linecap="round" />
+  <circle cx="48" cy="48" r="3" fill="#e6f7ff" />
+
+  <!-- Place letters at hours: 9(S), 10(r), 11(i), 1(K), 2(R), 3(G) -->
+  <!-- coordinates are relative to the group translate(16,16) -->
+  <!-- S at 9 o'clock -->
+  <text x="12" y="48" text-anchor="middle" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#e6f7ff">S</text>
+  <!-- r at 10 o'clock -->
+  <text x="24" y="36" text-anchor="middle" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#e6f7ff">r</text>
+  <!-- i at 11 o'clock -->
+  <text x="38" y="30" text-anchor="middle" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#e6f7ff">i</text>
+  <!-- K at 1 o'clock -->
+  <text x="60" y="30" text-anchor="middle" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#e6f7ff">K</text>
+  <!-- R at 2 o'clock -->
+  <text x="72" y="36" text-anchor="middle" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#e6f7ff">R</text>
+  <!-- G at 3 o'clock -->
+  <text x="84" y="48" text-anchor="middle" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#e6f7ff">G</text>
+  </g>
+</svg>

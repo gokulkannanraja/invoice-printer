@@ -1,0 +1,1101 @@
+/* Invoice Editor Styles */
+.app-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.invoice-container {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 800px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-radius: 0;
+  position: relative;
+  /* Center the invoice on the printed page and preserve natural height */
+  margin: 12mm auto !important;
+  padding: 12mm !important;
+}
+
+.invoice-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+/* Uniform invoice border variables and utility to ensure consistent thickness/color */
+:root {
+  --inv-border-width: 2px;
+  --inv-border-color: #000;
+  --inv-border: var(--inv-border-width) solid var(--inv-border-color);
+}
+
+/* Apply a consistent border to key invoice containers and table cells */
+.invoice-container,
+.bill-from,
+.bill-to,
+.services-table table,
+.services-table th,
+.services-table td,
+.invoice-items table,
+.invoice-items th,
+.invoice-items td,
+.totals,
+.left-bottom-section,
+.signature-section,
+.customer-info,
+.invoice-total,
+.invoice-meta,
+.signature-box {
+  border: var(--inv-border) !important;
+}
+
+/* SVG background fills via attributes; no extra rules needed here */
+
+.invoice-container * {
+  color: #333 !important;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.15 !important;
+  pointer-events: none;
+}
+
+.watermark svg {
+  display: block;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.company-info {
+  flex: 1;
+}
+
+.company-info h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+  text-align: left;
+}
+
+.company-logo-img {
+  width: 320px;
+  height: auto;
+  display: block;
+}
+
+.company-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.company-info.centered {
+  align-items: center;
+}
+
+/* Title removed per user preference */
+
+.invoice-meta {
+  flex: 1;
+  text-align: right;
+  line-height: 1.6;
+  max-width: 350px;
+  min-width: 300px;
+}
+
+.invoice-number,
+.invoice-date {
+  margin-bottom: 12px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+.invoice-number input,
+.invoice-date input {
+  margin-left: 8px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333 !important;
+  background: #fff;
+  width: 160px;
+  min-width: 160px;
+}
+
+.bill-sections {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  gap: 30px;
+}
+
+.bill-from,
+.bill-to {
+  flex: 1;
+  border: 2px solid #000;
+  padding: 20px;
+  border-radius: 0;
+  background-color: #f5f5f5;
+  min-height: 280px;
+  max-width: calc(50% - 15px);
+}
+
+.bill-from h3,
+.bill-to h3 {
+  font-size: 1.2rem;
+  margin: 0 0 16px 0;
+  color: #333;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.vendor-grid,
+.customer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  align-items: start;
+}
+
+.vendor-grid input,
+.customer-grid input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 14px;
+  color: #333 !important;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.vendor-display,
+.customer-display {
+  line-height: 1.4;
+}
+
+.vendor-display p,
+.customer-display p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.vendor-grid input:focus,
+.customer-grid input:focus {
+  border-color: #1976d2;
+  outline: none;
+}
+
+/* Removed - payment terms section no longer needed */
+
+/* Title moved to logo section */
+
+.invoice-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  align-items: flex-start;
+}
+
+.left-section {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.right-section {
+  flex: 1;
+  text-align: right;
+}
+
+.invoice-info div {
+  margin-bottom: 12px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.invoice-info input {
+  margin-left: 8px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333 !important;
+  background: #fff;
+  width: 150px;
+}
+
+.services-table {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.services-table table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #000;
+}
+
+.services-table th,
+.services-table td {
+  border: 2px solid #000;
+  padding: 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.services-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #333 !important;
+}
+
+.services-table td:nth-child(1) {
+  width: 50%;
+  text-align: left;
+}
+
+.services-table td:nth-child(2),
+.services-table td:nth-child(3),
+.services-table td:nth-child(4) {
+  text-align: center;
+  width: 16.67%;
+}
+
+.services-table .description-cell {
+  position: relative;
+}
+
+.services-table textarea {
+  width: calc(100% - 16px);
+  min-height: 80px;
+  /* remove inner border so table's 2px border shows cleanly */
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 8px;
+  resize: vertical;
+  font-family: inherit;
+  color: #333 !important;
+  background: transparent !important;
+  font-size: 14px;
+}
+
+.services-table input {
+  width: 80px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  color: #333 !important;
+  background: #fff;
+  font-size: 14px;
+}
+
+.totals-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.totals {
+  width: 300px;
+  border: 2px solid #333;
+  border-radius: 0;
+  padding: 8px;
+  background: #f5f5f5;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.total-row:last-child {
+  border-bottom: none;
+}
+
+.total-final {
+  border-bottom: 2px solid #333 !important;
+  border-top: 2px solid #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+
+.total-row span:first-child {
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.total-row input {
+  width: 100px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: right;
+  color: #333 !important;
+  background: #fff;
+  font-size: 14px;
+}
+
+.payment-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 40px;
+}
+
+.left-bottom-section {
+  border: 2px solid #000;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  width: 400px;
+  min-height: 150px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.signature-section {
+  border: 2px solid #333;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  width: 300px;
+  min-height: 150px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.signature-text {
+  color: #ccc;
+  font-weight: normal;
+  font-size: 16px;
+  opacity: 0.5;
+  margin: 0;
+}
+
+.account-details {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.account-details label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  margin-top: 0;
+  color: #333;
+}
+
+.account-details textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333 !important;
+  background: #fff;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.payment-method {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.payment-method input {
+  margin-left: 8px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333 !important;
+  background: #fff;
+}
+
+.account-details label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.account-details textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333 !important;
+  background: #fff;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.signature-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signature-box {
+  border: 2px solid #333;
+  padding: 20px 40px;
+  border-radius: 0;
+  background-color: #f5f5f5;
+}
+
+.signature-text {
+  color: #ccc;
+  font-weight: normal;
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+/* Removed date box - no longer needed */
+
+.print-button-container {
+  text-align: right;
+  margin-top: 30px;
+}
+
+.print-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.print-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+@media print {
+  @page {
+    margin: 0;
+    size: A4;
+  }
+  
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+  }
+  
+  body * {
+    visibility: hidden !important;
+  }
+  
+  .invoice-container, .invoice-container * {
+    visibility: visible !important;
+  }
+  
+  .invoice-container {
+    /* Center the invoice on the printed page and preserve natural height */
+    position: relative !important;
+    margin: 12mm auto !important;
+    padding: 12mm !important;
+    width: 162mm !important; /* slightly smaller to avoid overflow */
+    max-width: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important; /* inline SVG provides visual background */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    overflow: visible !important;
+  }
+  /* hide interactive controls when printing */
+  .mode-controls,
+  .print-button-container,
+  button,
+  .view-btn,
+  .back-btn,
+  .print-btn {
+    display: none !important;
+  }
+  
+  .watermark {
+    opacity: 0.15 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .bill-from,
+  .bill-to {
+    border: 2px solid #000 !important;
+    background-color: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .payment-section {
+    display: flex !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .left-bottom-section {
+    border: 2px solid #000 !important;
+    background-color: #f5f5f5 !important;
+    min-height: 80px !important;
+    padding: 8px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    flex: 1 1 60% !important;
+  }
+
+  .signature-section {
+    border: 2px solid #000 !important;
+    background-color: #f5f5f5 !important;
+    min-height: 80px !important;
+    padding: 12px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    flex: 0 0 30% !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+  }
+  
+  .services-table {
+    border-collapse: collapse !important;
+  }
+  
+  .services-table th,
+  .services-table td {
+    border: 2px solid #000 !important;
+    background-color: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .services-table th {
+    background-color: #e0e0e0 !important;
+    border-bottom: 2px solid #000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }  .print-button-container {
+    display: none !important;
+  }
+  
+  .vendor-grid input,
+  .invoice-number input,
+  .invoice-date input,
+  .customer-grid input,
+  .services-table input,
+  .services-table textarea,
+  .payment-method input,
+  .account-details textarea {
+    display: none !important;
+  }
+  
+  /* Hide input elements but show their containers */
+  .vendor-grid input,
+  .customer-grid input,
+  .services-table input,
+  .services-table textarea,
+  .payment-method input,
+  .account-details textarea {
+    display: none !important;
+  }
+  
+  /* Force display of static content when inputs are hidden */
+  .bill-from > div:not(.vendor-grid),
+  .bill-to > div:not(.customer-grid),
+  .account-details > div,
+  .invoice-meta span,
+  .totals span,
+  .services-table td span,
+  .services-table th span {
+    display: inline !important;
+    visibility: visible !important;
+  }
+  
+  /* Ensure containers are visible - preserve original layout (grid/flex) */
+  .customer-grid,
+  .bill-from,
+  .bill-to,
+  .account-details {
+    visibility: visible !important;
+  }
+
+  /* Preserve side-by-side layout for sections */
+  .bill-sections {
+    display: flex !important;
+    gap: 30px !important;
+    align-items: flex-start !important;
+  }
+
+  .bill-from,
+  .bill-to {
+    flex: 1 1 0 !important;
+    max-width: calc(50% - 15px) !important;
+    box-sizing: border-box !important;
+  }
+
+  .payment-section {
+    display: flex !important;
+    gap: 40px !important;
+    align-items: flex-start !important;
+  }
+
+  .left-bottom-section,
+  .signature-section {
+    box-sizing: border-box !important;
+  }
+
+  /* Reduce global print font slightly */
+  .invoice-container,
+  .invoice-container * {
+    font-size: 13px !important;
+  }
+  
+  /* Ensure colors print correctly */
+  .logo-section .invoice-title,
+  .company-logo,
+  text[fill="#000080"] {
+    color: #000080 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  /* Ensure SVG colors print */
+  svg * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+/* Enforce uniform border style for invoice elements with high specificity */
+.invoice-container .bill-from,
+  .invoice-container .bill-to,
+  .invoice-container .services-table table,
+  .invoice-container .services-table th,
+  .invoice-container .services-table td,
+  .invoice-container .invoice-items table,
+  .invoice-container .invoice-items th,
+  .invoice-container .invoice-items td,
+  .invoice-container .totals,
+  .invoice-container .left-bottom-section,
+  .invoice-container .signature-section,
+  .invoice-container .customer-info,
+  .invoice-container .invoice-total,
+  .invoice-container .invoice-meta,
+  .invoice-container .signature-box {
+    border-width: var(--inv-border-width) !important;
+    border-style: solid !important;
+    border-color: var(--inv-border-color) !important;
+  }
+
+  @media print {
+    /* Final print-specific enforcement to ensure consistent border thickness/color */
+    .invoice-container .bill-from,
+    .invoice-container .bill-to,
+    .invoice-container .services-table table,
+    .invoice-container .services-table th,
+    .invoice-container .services-table td,
+    .invoice-container .invoice-items table,
+    .invoice-container .invoice-items th,
+    .invoice-container .invoice-items td,
+    .invoice-container .totals,
+    .invoice-container .left-bottom-section,
+    .invoice-container .signature-section,
+    .invoice-container .customer-info,
+    .invoice-container .invoice-total,
+    .invoice-container .invoice-meta,
+    .invoice-container .signature-box {
+      border-width: var(--inv-border-width) !important;
+      border-style: solid !important;
+      border-color: var(--inv-border-color) !important;
+    }
+  }
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Force root and body to allow centering the invoice container */
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 900px; /* keep invoice width reasonable */
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Simple print override to fix values display */
+@media print {
+  @page {
+    margin: 0;
+    size: A4;
+  }
+  
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+  }
+  
+  /* Hide everything except invoice */
+  body * {
+    visibility: hidden !important;
+  }
+  
+  .invoice-container,
+  .invoice-container * {
+    visibility: visible !important;
+  }
+  
+  .invoice-container {
+    /* Center the invoice on the printed page and preserve natural height */
+    position: relative !important;
+    margin: 15mm auto !important;
+    padding: 16mm !important;
+    width: 170mm !important; /* A4 width minus sensible margins */
+    max-width: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important; /* inline SVG provides visual background */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    overflow: visible !important;
+  }
+  
+  /* Hide mode controls when printing */
+  .mode-controls {
+    display: none !important;
+  }
+  
+  /* Ensure all text and content is visible (do not force display:block) */
+  .invoice-container p,
+  .invoice-container div,
+  .invoice-container span,
+  .invoice-container td,
+  .invoice-container th,
+  .invoice-container h1,
+  .invoice-container h3 {
+    visibility: visible !important;
+  }
+  
+  /* Preserve styling */
+  .bill-from,
+  .bill-to {
+    border: 2px solid #333 !important;
+    background-color: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .services-table table,
+  .services-table th,
+  .services-table td {
+    border: 2px solid #333 !important;
+    background-color: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .watermark {
+    opacity: 0.15 !important;
+  }
+}
+
+/* Print preview styles removed - view and print are unified */
+
+/* Mode Controls Styling */
+.mode-controls {
+  margin: 20px 0;
+  text-align: center;
+  padding: 15px;
+  background: transparent;
+}
+
+.view-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn {
+  background-color: #6c757d;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #545b62;
+  transform: translateY(-2px);
+}
+
+/* print-mode-btn removed - print is invoked directly from view */
+
+.print-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.print-btn:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+.view-controls,
+.print-controls {
+  display: inline-block;
+}
+
+/* Additional invoice items styling */
+.invoice-items {
+  margin-bottom: 30px;
+}
+
+.invoice-items table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #333;
+}
+
+.invoice-items th,
+.invoice-items td {
+  border: 2px solid #333;
+  padding: 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.invoice-items th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #333;
+}
+
+.invoice-items input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+  background: #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.add-item-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-item-btn:hover {
+  background: #218838;
+}
+
+.customer-info {
+  margin-bottom: 30px;
+  border: 2px solid #333;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.customer-info h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.customer-info input,
+.customer-info textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+  background: #fff;
+  font-size: 14px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.invoice-total {
+  text-align: right;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 2px solid #333;
+}
+
+.total-row {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.invoice-meta {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 2px solid #333;
+}
+
+.invoice-meta > div {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invoice-meta input {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+  background: #fff;
+  font-size: 14px;
+}
+
+.due-date {
+  margin-bottom: 10px;
+}

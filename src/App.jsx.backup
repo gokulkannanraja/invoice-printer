@@ -1,0 +1,289 @@
+
+import { useRef, useState, useEffect } from 'react';
+import logo from './assets/invoice-logo.svg';
+import './App        <div className="invoice-meta">
+          <div className="invoice-number">
+                     <td>
+                {mode === 'edit' ? (
+                  <input name="quantity" type="number" value={invoice.quantity} onChange={handleChange} />
+                ) : (
+                  invoice.quantity
+                )}
+              </td>
+              <td>
+                {mode === 'edit' ? (
+                  <input name="price" type="number" value={invoice.price} onChange={handleChange} />
+                ) : (
+                  `₹${invoice.price}`
+                )}
+              </td>o.: {mode === 'edit' ? <input name="invoiceNumber" value={invoice.invoiceNumber} onChange={handleChange} placeholder="Invoice Number" /> : invoice.invoiceNumber}
+          </div>
+          <div className="invoice-date">
+            Date: {mode === 'edit' ? <input name="invoiceDate" value={invoice.invoiceDate} onChange={handleChange} placeholder="Date" /> : invoice.invoiceDate}
+          </div>
+        </div>const initialInvoice = {
+  // Vendor Details
+  vendorFirstName: '',
+  vendorLastName: '',
+  vendorStreetAddress: '',
+  vendorCity: '',
+  vendorState: '',
+  vendorPostalCode: '',
+  vendorPhone: '',
+  vendorEmail: '',
+  vendorPAN: '',
+  
+  // Invoice Details
+  invoiceNumber: '',
+  dueDate: '',
+  
+  // Customer Details
+  customerFirstName: '',
+  customerLastName: '',
+  customerStreetAddress: '',
+  customerCity: '',
+  customerState: '',
+  customerPostalCode: '',
+  customerPhone: '',
+  customerEmail: '',
+  
+  // Service Details
+  serviceDescription: '',
+  quantity: '0',
+  price: '0',
+  
+  // Payment Details
+  paymentMethod: '',
+  accountDetails: ''
+};
+
+function App() {
+  const [invoice, setInvoice] = useState(initialInvoice);
+  const [mode, setMode] = useState('edit'); // 'edit', 'view', 'print'
+  const printRef = useRef();
+
+  // Add keyboard shortcut for printing (Ctrl+P)
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.ctrlKey && e.key === 'p') {
+        e.preventDefault();
+        // Go to print mode from any mode
+        setMode('print');
+        setTimeout(() => {
+          window.print();
+        }, 300);
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyPress);
+    return () => document.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInvoice((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePrint = () => {
+    setEditMode(false);
+    setTimeout(() => {
+      window.print();
+      setEditMode(true);
+    }, 100);
+  };
+
+  const calculateSubtotal = () => {
+    const qty = parseFloat(invoice.quantity) || 0;
+    const prc = parseFloat(invoice.price) || 0;
+    return (qty * prc).toFixed(2);
+  };
+
+  const calculateTotal = () => {
+    return calculateSubtotal();
+  };
+
+  return (
+    <div className="invoice-container" ref={printRef}>
+      <div className="watermark">
+        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" stroke="#999" stroke-width="3" fill="none" opacity="0.6"/>
+          <circle cx="100" cy="100" r="80" stroke="#999" stroke-width="2" fill="none" opacity="0.5"/>
+          
+          {/* Clock numbers */}
+          <text x="100" y="25" font-size="16" fill="#999" text-anchor="middle" opacity="0.6">12</text>
+          <text x="145" y="105" font-size="16" fill="#999" text-anchor="middle" opacity="0.6">3</text>
+          <text x="100" y="180" font-size="16" fill="#999" text-anchor="middle" opacity="0.6">6</text>
+          <text x="55" y="105" font-size="16" fill="#999" text-anchor="middle" opacity="0.6">9</text>
+          
+          {/* Clock hands */}
+          <line x1="100" y1="100" x2="100" y2="60" stroke="#999" stroke-width="4" opacity="0.6"/>
+          <line x1="100" y1="100" x2="130" y2="100" stroke="#999" stroke-width="3" opacity="0.6"/>
+          <circle cx="100" cy="100" r="4" fill="#999" opacity="0.6"/>
+          
+          {/* SriKRG text in center */}
+          <text x="100" y="100" font-size="20" font-weight="bold" fill="#666" text-anchor="middle" alignment-baseline="middle" opacity="0.7">SriKRG</text>
+        </svg>
+      </div>
+      
+      <div className="invoice-header">
+        <div className="logo-section">
+          <h1 className="invoice-title">Invoice</h1>
+        </div>
+        <div className="invoice-meta">
+          <div className="invoice-number">
+            Invoice No.: {mode === 'edit' ? <input name="invoiceNumber" value={invoice.invoiceNumber} onChange={handleChange} placeholder="Invoice Number" /> : invoice.invoiceNumber}
+          </div>
+          <div className="invoice-date">
+            Date: {mode === 'edit' ? <input name="dueDate" type="date" value={invoice.dueDate} onChange={handleChange} /> : invoice.dueDate}
+          </div>
+        </div>
+      </div>
+
+      <div className="bill-sections">
+        <div className="bill-from">
+          <h3>From:</h3>
+          {mode === 'edit' ? (
+            <div className="vendor-grid">
+              <input name="vendorFirstName" value={invoice.vendorFirstName} onChange={handleChange} placeholder="First Name" />
+              <input name="vendorLastName" value={invoice.vendorLastName} onChange={handleChange} placeholder="Last Name" />
+              <input name="vendorStreetAddress" value={invoice.vendorStreetAddress} onChange={handleChange} placeholder="Street Address" />
+              <input name="vendorCity" value={invoice.vendorCity} onChange={handleChange} placeholder="City" />
+              <input name="vendorState" value={invoice.vendorState} onChange={handleChange} placeholder="State" />
+              <input name="vendorPostalCode" value={invoice.vendorPostalCode} onChange={handleChange} placeholder="Postal Code" />
+              <input name="vendorPhone" value={invoice.vendorPhone} onChange={handleChange} placeholder="Phone" />
+              <input name="vendorEmail" value={invoice.vendorEmail} onChange={handleChange} placeholder="Email" />
+              <input name="vendorPAN" value={invoice.vendorPAN} onChange={handleChange} placeholder="PAN Number" />
+              <div></div> {/* Empty div for grid alignment */}
+            </div>
+          ) : (
+            <>
+              <div><strong>{invoice.vendorFirstName} {invoice.vendorLastName}</strong></div>
+              <div>{invoice.vendorStreetAddress} {invoice.vendorCity}</div>
+              <div>{invoice.vendorState} {invoice.vendorPostalCode}</div>
+              <div>{invoice.vendorPhone} {invoice.vendorEmail}</div>
+              {invoice.vendorPAN && <div>PAN: {invoice.vendorPAN}</div>}
+            </>
+          )}
+        </div>
+        <div className="bill-to">
+          <h3>To:</h3>
+          {mode === 'edit' ? (
+            <div className="customer-grid">
+              <input name="customerFirstName" value={invoice.customerFirstName} onChange={handleChange} placeholder="First Name" />
+              <input name="customerLastName" value={invoice.customerLastName} onChange={handleChange} placeholder="Last Name" />
+              <input name="customerStreetAddress" value={invoice.customerStreetAddress} onChange={handleChange} placeholder="Street Address" />
+              <input name="customerCity" value={invoice.customerCity} onChange={handleChange} placeholder="City" />
+              <input name="customerState" value={invoice.customerState} onChange={handleChange} placeholder="State" />
+              <input name="customerPostalCode" value={invoice.customerPostalCode} onChange={handleChange} placeholder="Postal Code" />
+              <input name="customerPhone" value={invoice.customerPhone} onChange={handleChange} placeholder="Phone" />
+              <input name="customerEmail" value={invoice.customerEmail} onChange={handleChange} placeholder="Email" />
+            </div>
+          ) : (
+            <>
+              <div><strong>{invoice.customerFirstName} {invoice.customerLastName}</strong></div>
+              <div>{invoice.customerStreetAddress} {invoice.customerCity}</div>
+              <div>{invoice.customerState} {invoice.customerPostalCode}</div>
+              <div>{invoice.customerPhone} {invoice.customerEmail}</div>
+            </>
+          )}
+        </div>
+      </div>
+
+      <div className="services-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Description of Services</th>
+              <th>Quantity (Days)</th>
+              <th>Price</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="description-cell">
+                {mode === 'edit' ? (
+                  <textarea 
+                    name="serviceDescription" 
+                    value={invoice.serviceDescription} 
+                    onChange={handleChange}
+                    placeholder="Enter service description..."
+                  />
+                ) : (
+                  invoice.serviceDescription
+                )}
+              </td>
+              <td>
+                {editMode ? (
+                  <input name="quantity" type="number" value={invoice.quantity} onChange={handleChange} />
+                ) : (
+                  invoice.quantity
+                )}
+              </td>
+              <td>
+                {editMode ? (
+                  <input name="price" type="number" step="0.01" value={invoice.price} onChange={handleChange} />
+                ) : (
+                  `₹${invoice.price}`
+                )}
+              </td>
+              <td>₹{calculateSubtotal()}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="totals-section">
+        <div className="totals">
+          <div className="total-row total-final">
+            <span><strong>Total</strong></span>
+            <span><strong>₹{calculateTotal()}</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div className="payment-section">
+        <div className="left-bottom-section">
+          <div className="account-details">
+            <label>Bank Details:</label>
+            {editMode ? (
+              <textarea 
+                name="accountDetails" 
+                value={invoice.accountDetails} 
+                onChange={handleChange}
+                placeholder="Enter bank account details, UPI, etc."
+                rows="4"
+              />
+            ) : (
+              <div>{invoice.accountDetails}</div>
+            )}
+          </div>
+        </div>
+        <div className="signature-area">
+          <div className="signature-box">
+            <div className="signature-text">Signature</div>
+          </div>
+        </div>
+      </div>
+      
+      {editMode && (
+        <div style={{textAlign: 'center', marginTop: '20px'}}>
+          <button onClick={() => setEditMode(false)} style={{marginRight: '10px', padding: '10px 20px'}}>
+            View Invoice
+          </button>
+          <button 
+            onClick={() => {
+              setEditMode(false);
+              setTimeout(() => window.print(), 300);
+            }}
+            style={{padding: '10px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px'}}
+          >
+            Print Invoice
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
