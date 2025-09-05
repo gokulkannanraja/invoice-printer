@@ -9,9 +9,14 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,6 +33,11 @@ jobs:
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_PAGES_TOKEN }}
+          # Prefer a user-provided PAT stored in GH_PAGES_TOKEN (recommended when push is blocked for the actions bot)
+          github_token: ${{ secrets.GH_PAGES_TOKEN || secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
+      - name: Verify build output
+        run: |
+          echo "dist contents:"
+          ls -la ./dist || true
