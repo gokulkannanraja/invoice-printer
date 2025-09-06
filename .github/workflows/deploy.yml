@@ -30,6 +30,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify build output
+        run: |
+          echo "dist contents:"
+          ls -la ./dist || true
+
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -37,7 +42,3 @@ jobs:
           github_token: ${{ secrets.GH_PAGES_TOKEN || secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
-      - name: Verify build output
-        run: |
-          echo "dist contents:"
-          ls -la ./dist || true
